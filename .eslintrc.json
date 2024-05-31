@@ -1,0 +1,55 @@
+{
+  "root": true,
+  "env": { "browser": true, "es2020": true },
+  "extends": [
+    "plugin:react/recommended",
+    "plugin:react/jsx-runtime",
+    "eslint:recommended",
+    "plugin:@typescript-eslint/recommended",
+    "plugin:react-hooks/recommended",
+    "plugin:prettier/recommended",
+    "plugin:testing-library/react"
+  ],
+  "ignorePatterns": ["dist", ".eslintrc.json", "node_modules/"],
+  "parser": "@typescript-eslint/parser",
+  "plugins": [
+    "react-hooks",
+    "testing-library",
+    "@typescript-eslint",
+    "prettier",
+    "react-refresh"],
+  "rules": {
+    "react-refresh/only-export-components": [
+      "warn",
+      { "allowConstantExport": true }
+    ],
+    "prettier/prettier": [
+      "warn",
+      {
+        "trailingComma": "none",
+        "semi": true,
+        "endOfLine": "auto"
+      }
+    ],
+    "testing-library/prefer-screen-queries": "warn"
+  },
+  "overrides": [
+    {
+      "files": [
+        "**/*.ts?(x)"
+      ],
+      "rules": {
+        "@typescript-eslint/ban-ts-ignore": "off",
+        "@typescript-eslint/no-empty-function": [
+          "error",
+          {
+            "allow": [
+              "private-constructors"
+            ]
+          }
+        ],
+        "@typescript-eslint/no-inferrable-types": "off"
+      }
+    }
+  ]
+}
