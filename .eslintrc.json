@@ -1,6 +1,6 @@
 {
-  "root": true,
-  "env": { "browser": true, "es2020": true },
+  "root": true, 
+  "env": { "browser": true, "es2020": true }, 
   "extends": [
     "plugin:react/recommended",
     "plugin:react/jsx-runtime",
@@ -18,6 +18,11 @@
     "@typescript-eslint",
     "prettier",
     "react-refresh"],
+  "settings": {
+    "react": {
+      "version": "detect"
+    }
+  },
   "rules": {
     "react-refresh/only-export-components": [
       "warn",
