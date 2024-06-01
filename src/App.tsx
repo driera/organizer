@@ -12,11 +12,7 @@ function App() {
     <>
       <h1>Do you have anything to write down?</h1>
       <NoteTaker onClick={handleClick} />
-      <ul>
-        {notes.map((note, index) => (
-          <li key={index}>{note}</li>
-        ))}
-      </ul>
+      <NoteList notes={notes} />
     </>
   );
 }
@@ -39,6 +35,19 @@ const NoteTaker = ({ onClick }: { onClick: (note: string) => void }) => {
       <input type="text" onChange={handleInput} value={text} />
       <button onClick={handleClick}>Send</button>
     </>
+  );
+};
+
+const NoteList = ({ notes }: { notes: string[] }) => {
+  if (notes.length === 0) {
+    return <p>No notes yet.</p>;
+  }
+  return (
+    <ul>
+      {notes.map((note, index) => (
+        <li key={index}>{note}</li>
+      ))}
+    </ul>
   );
 };
 

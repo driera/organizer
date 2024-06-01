@@ -22,4 +22,10 @@ describe("App", () => {
 
     await screen.findByRole("listitem");
   });
+
+  it("shows placeholders when there are no notes", () => {
+    render(<App />);
+
+    expect(screen.getByText("No notes yet.")).toBeInTheDocument();
+  });
 });
