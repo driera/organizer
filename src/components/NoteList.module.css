@@ -1,0 +1,17 @@
+.list {
+  display: grid;
+  gap: 20px;
+  justify-content: center;
+  list-style: none;
+  padding: 0;
+}
+
+.note {
+  display: block;
+  width: 400px;
+  padding: 10px;
+  background: white;
+  color: black;
+  border-radius: 8px;
+  box-shadow: var(--shadow-elevation-high);
+}

@@ -5,6 +5,7 @@ type NoteTakerTypes = { onClick: (note: string) => void };
 
 export const NoteTaker: FunctionComponent<NoteTakerTypes> = ({ onClick }) => {
   const [text, setText] = useState<string>("");
+
   const handleInput = (event: React.ChangeEvent<HTMLInputElement>) => {
     setText(event.target.value);
   };
