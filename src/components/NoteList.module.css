@@ -6,6 +6,12 @@
   padding: 0;
 }
 
+.listItem {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
 .note {
   display: block;
   width: 400px;

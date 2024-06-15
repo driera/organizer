@@ -10,10 +10,16 @@ function App() {
     setNotes([...notes, note]);
   };
 
+  const handleDelete = (index: number) => {
+    const newNotes = [...notes];
+    newNotes.splice(index, 1);
+    setNotes(newNotes);
+  };
+
   return (
     <>
       <NoteTaker onClick={handleClick} />
-      <NoteList notes={notes} />
+      <NoteList notes={notes} onDelete={handleDelete} />
     </>
   );
 }

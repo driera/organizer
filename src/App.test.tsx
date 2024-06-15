@@ -28,4 +28,21 @@ describe("App", () => {
 
     expect(screen.getByText("No notes yet.")).toBeInTheDocument();
   });
+
+  it("writes and removes a note", async () => {
+    const user = userEvent.setup({ delay: 0 });
+    render(<App />);
+
+    const input = screen.getByRole("textbox");
+    await user.type(input, "Hello, World!");
+    const button = screen.getByRole("button", { name: "Send" });
+    await user.click(button);
+
+    await screen.findByRole("listitem", { name: "Hello, World!" });
+
+    const deleteButton = screen.getByRole("button", { name: "Delete note #0" });
+    await user.click(deleteButton);
+
+    expect(screen.getByText("No notes yet.")).toBeInTheDocument();
+  });
 });
