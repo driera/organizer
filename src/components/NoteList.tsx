@@ -1,8 +1,9 @@
 import { FunctionComponent } from "react";
 import style from "./NoteList.module.css";
+import { Notes } from "../types";
 
 type NoteListTypes = {
-  notes: string[];
+  notes: Notes;
   onDelete: (index: number) => void;
 };
 
@@ -23,7 +24,7 @@ export const NoteList: FunctionComponent<NoteListTypes> = ({
           aria-labelledby={`note${index}`}
         >
           <div id={`note${index}`} className={style.note}>
-            {note}
+            {note.message}
           </div>
           <button
             aria-label={`Delete note #${index}`}

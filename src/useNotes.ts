@@ -1,14 +1,15 @@
 import { useEffect, useState } from "react";
 import { NotesRepository } from "./repository/notes-repository";
+import { Note, Notes } from "./types";
 
 export const useNotes = () => {
-  const [notes, setNotes] = useState<string[]>(NotesRepository.getNotes());
+  const [notes, setNotes] = useState<Notes>(NotesRepository.getNotes());
 
   useEffect(() => {
     NotesRepository.setNotes(notes);
   }, [notes]);
 
-  const addNote = (note: string) => setNotes([note, ...notes]);
+  const addNote = (note: Note) => setNotes([note, ...notes]);
 
   const removeNote = (index: number) => {
     const newNotes = [...notes];

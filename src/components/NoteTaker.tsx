@@ -1,26 +1,28 @@
 import { FunctionComponent } from "react";
 import { useState } from "react";
+import { Note } from "../types";
 
-type NoteTakerTypes = { onClick: (note: string) => void };
+type NoteTakerTypes = { onClick: (note: Note) => void };
 
 export const NoteTaker: FunctionComponent<NoteTakerTypes> = ({ onClick }) => {
-  const [text, setText] = useState<string>("");
+  const emptyNote: Note = { message: "" };
+  const [note, setNote] = useState<Note>(emptyNote);
 
   const handleInput = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setText(event.target.value);
+    setNote({ message: event.target.value });
   };
 
   const handleClick = () => {
-    if (text === "") return;
+    if (note.message === "") return;
 
-    onClick(text);
-    setText("");
+    onClick(note);
+    setNote(emptyNote);
   };
 
   return (
     <>
       <h1>Do you have anything to write down?</h1>
-      <input type="text" onChange={handleInput} value={text} />
+      <input type="text" onChange={handleInput} value={note.message} />
       <button onClick={handleClick}>Send</button>
     </>
   );
