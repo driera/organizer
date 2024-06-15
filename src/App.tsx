@@ -7,7 +7,7 @@ function App() {
   const [notes, setNotes] = useState<string[]>([]);
 
   const handleClick = (note: string) => {
-    setNotes([...notes, note]);
+    setNotes([note, ...notes]);
   };
 
   const handleDelete = (index: number) => {

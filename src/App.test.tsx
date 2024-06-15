@@ -45,4 +45,22 @@ describe("App", () => {
 
     expect(screen.getByText("No notes yet.")).toBeInTheDocument();
   });
+
+  it("Most recent note appears first", async () => {
+    const user = userEvent.setup({ delay: 0 });
+    render(<App />);
+
+    const input = screen.getByRole("textbox");
+    await user.type(input, "Hello, World!");
+    const button = screen.getByRole("button", { name: "Send" });
+    await user.click(button);
+
+    await user.type(input, "Good bye!");
+    await user.click(button);
+
+    const notes = screen.getAllByRole("listitem");
+
+    expect(notes[0]).toHaveAccessibleName("Good bye!");
+    expect(notes[1]).toHaveAccessibleName("Hello, World!");
+  });
 });
