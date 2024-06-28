@@ -13,11 +13,17 @@
 }
 
 .note {
-  display: block;
+  display: flex;
+  justify-content: space-between;
   width: 400px;
   padding: 10px;
   background: white;
   color: black;
   border-radius: 8px;
   box-shadow: var(--shadow-elevation-high);
+}
+
+.note-content {
+  margin-right: 20px;
+  text-align: start;
 }

@@ -23,8 +23,11 @@ export const NoteList: FunctionComponent<NoteListTypes> = ({
           className={style.listItem}
           aria-labelledby={`note${index}`}
         >
-          <div id={`note${index}`} className={style.note}>
-            {note.message}
+          <div className={style.note}>
+            <span id={`note${index}`} className={style.noteContent}>
+              {note.message}
+            </span>
+            <span>{note.dueDate}</span>
           </div>
           <button
             aria-label={`Delete note #${index}`}

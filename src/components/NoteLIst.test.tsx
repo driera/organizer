@@ -5,7 +5,10 @@ import userEvent from "@testing-library/user-event";
 describe("NoteList", () => {
   it("renders a list of notes", () => {
     render(
-      <NoteList notes={[{ message: "Hello, World!" }]} onDelete={jest.fn()} />
+      <NoteList
+        notes={[{ message: "Hello, World!", dueDate: "today" }]}
+        onDelete={jest.fn()}
+      />
     );
 
     expect(
@@ -15,7 +18,7 @@ describe("NoteList", () => {
 
   it("runs callback when note delete button is triggered", async () => {
     const user = userEvent.setup({ delay: 0 });
-    const notes = [{ message: "Hello, World!" }];
+    const notes = [{ message: "Hello, World!", dueDate: "today" }];
     const onDelete = jest.fn();
     render(<NoteList notes={notes} onDelete={onDelete} />);
 
@@ -26,6 +29,15 @@ describe("NoteList", () => {
   });
 
   describe("due date", () => {
-    it.todo("each notes has a due date of 'today' by default");
+    it("each notes has a select with its due day", () => {
+      render(
+        <NoteList
+          notes={[{ message: "Hello, World!", dueDate: "today" }]}
+          onDelete={jest.fn()}
+        />
+      );
+
+      expect(screen.getByText("today")).toBeInTheDocument();
+    });
   });
 });
