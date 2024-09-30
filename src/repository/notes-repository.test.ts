@@ -1,10 +1,13 @@
+import { dueDates } from "../types";
 import { NotesRepository } from "./notes-repository";
 
 describe("NotesRepository", () => {
   it("saves notes", () => {
     jest.spyOn(window.localStorage.__proto__, "setItem");
 
-    NotesRepository.setNotes([{ message: "Hello, World!", dueDate: "today" }]);
+    NotesRepository.setNotes([
+      { message: "Hello, World!", dueDate: dueDates.TODAY }
+    ]);
 
     expect(window.localStorage.setItem).toHaveBeenCalledWith(
       "organizer-notes",
@@ -14,7 +17,9 @@ describe("NotesRepository", () => {
 
   it("extracts notes", () => {
     jest.spyOn(window.localStorage.__proto__, "getItem");
-    NotesRepository.setNotes([{ message: "Hello, World!", dueDate: "today" }]);
+    NotesRepository.setNotes([
+      { message: "Hello, World!", dueDate: dueDates.TODAY }
+    ]);
 
     const notes = NotesRepository.getNotes();
 
@@ -24,7 +29,9 @@ describe("NotesRepository", () => {
 
   it("reset notes", () => {
     jest.spyOn(window.localStorage.__proto__, "removeItem");
-    NotesRepository.setNotes([{ message: "Hello, World!", dueDate: "today" }]);
+    NotesRepository.setNotes([
+      { message: "Hello, World!", dueDate: dueDates.TODAY }
+    ]);
 
     NotesRepository.resetNotes();
 

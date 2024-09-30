@@ -1,15 +1,15 @@
 import { FunctionComponent } from "react";
 import { useState } from "react";
-import { Note } from "../types";
+import { dueDates, Note } from "../types";
 
 type NoteTakerTypes = { onClick: (note: Note) => void };
 
 export const NoteTaker: FunctionComponent<NoteTakerTypes> = ({ onClick }) => {
-  const emptyNote: Note = { message: "", dueDate: "today" };
+  const emptyNote: Note = { message: "", dueDate: dueDates.TODAY };
   const [note, setNote] = useState<Note>(emptyNote);
 
   const handleInput = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setNote({ message: event.target.value, dueDate: "today" });
+    setNote({ message: event.target.value, dueDate: dueDates.TODAY });
   };
 
   const handleClick = () => {

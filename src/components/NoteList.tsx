@@ -1,6 +1,6 @@
 import { FunctionComponent } from "react";
 import style from "./NoteList.module.css";
-import { Note, Notes } from "../types";
+import { dueDates, Note, Notes } from "../types";
 
 type NoteListTypes = {
   notes: Notes;
@@ -22,11 +22,6 @@ export const NoteList: FunctionComponent<NoteListTypes> = ({
     newNotes[index] = { ...note, dueDate: value };
     onUpdate(newNotes);
   };
-
-  enum dueDates {
-    TODAY = "today",
-    SOME_DAY = "some day"
-  }
 
   return (
     <ul className={style.list}>

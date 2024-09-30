@@ -1,13 +1,13 @@
 import { render, screen } from "@testing-library/react";
 import { NoteList } from "./NoteList";
 import userEvent from "@testing-library/user-event";
-import { Notes } from "../types";
+import { dueDates, Notes } from "../types";
 
 describe("NoteList", () => {
   it("renders a list of notes", () => {
     render(
       <NoteList
-        notes={[{ message: "Hello, World!", dueDate: "today" }]}
+        notes={[{ message: "Hello, World!", dueDate: dueDates.TODAY }]}
         onDelete={jest.fn()}
         onUpdate={jest.fn()}
       />
@@ -20,7 +20,9 @@ describe("NoteList", () => {
 
   it("runs callback when note delete button is triggered", async () => {
     const user = userEvent.setup({ delay: 0 });
-    const notes: Notes = [{ message: "Hello, World!", dueDate: "today" }];
+    const notes: Notes = [
+      { message: "Hello, World!", dueDate: dueDates.TODAY }
+    ];
     const onDelete = jest.fn();
     render(<NoteList notes={notes} onDelete={onDelete} onUpdate={jest.fn()} />);
 
@@ -34,7 +36,7 @@ describe("NoteList", () => {
     it("each notes has a select with its due day", () => {
       render(
         <NoteList
-          notes={[{ message: "Hello, World!", dueDate: "today" }]}
+          notes={[{ message: "Hello, World!", dueDate: dueDates.TODAY }]}
           onDelete={jest.fn()}
           onUpdate={jest.fn()}
         />
@@ -55,7 +57,7 @@ describe("NoteList", () => {
       const message = "Hello, World!";
       render(
         <NoteList
-          notes={[{ message, dueDate: "today" }]}
+          notes={[{ message, dueDate: dueDates.TODAY }]}
           onDelete={jest.fn()}
           onUpdate={onUpdate}
         />
