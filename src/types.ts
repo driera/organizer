@@ -1,6 +1,6 @@
 export type Note = {
   message: string;
-  dueDate: string;
+  dueDate: "today" | "some day";
 };
 
 export type Notes = Note[];

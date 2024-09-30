@@ -1,18 +1,31 @@
 import { FunctionComponent } from "react";
 import style from "./NoteList.module.css";
-import { Notes } from "../types";
+import { Note, Notes } from "../types";
 
 type NoteListTypes = {
   notes: Notes;
   onDelete: (index: number) => void;
+  onUpdate: (notes: Notes) => void;
 };
 
 export const NoteList: FunctionComponent<NoteListTypes> = ({
   notes,
-  onDelete
+  onDelete,
+  onUpdate
 }) => {
   if (notes.length === 0) {
     return <p>No notes yet.</p>;
+  }
+
+  const handleChange = (value: dueDates, note: Note, index: number) => {
+    const newNotes = [...notes];
+    newNotes[index] = { ...note, dueDate: value };
+    onUpdate(newNotes);
+  };
+
+  enum dueDates {
+    TODAY = "today",
+    SOME_DAY = "some day"
   }
 
   return (
@@ -27,8 +40,16 @@ export const NoteList: FunctionComponent<NoteListTypes> = ({
             <span id={`note${index}`} className={style.noteContent}>
               {note.message}
             </span>
-            <select aria-label="Due date" className={style.dueDate}>
-              <option value={note.dueDate}>{note.dueDate}</option>
+            <select
+              aria-label="Due date"
+              className={style.dueDate}
+              defaultValue={note.dueDate}
+              onChange={(event) =>
+                handleChange(event.target.value as dueDates, note, index)
+              }
+            >
+              <option value={dueDates.TODAY}>Today</option>
+              <option value={dueDates.SOME_DAY}>Some day</option>
             </select>
           </div>
           <button

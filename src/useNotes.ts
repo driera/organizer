@@ -17,5 +17,7 @@ export const useNotes = () => {
     setNotes(newNotes);
   };
 
-  return { notes, addNote, removeNote };
+  const updateNotes = (newNotes: Notes) => setNotes(newNotes);
+
+  return { notes, addNote, removeNote, updateNotes };
 };
