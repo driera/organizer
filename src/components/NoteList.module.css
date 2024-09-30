@@ -27,3 +27,18 @@
   margin-right: 20px;
   text-align: start;
 }
+
+.dueDate {
+  cursor: pointer;
+  background: transparent;
+  color: black;
+  border: none;
+  
+  &:focus-visible {
+    border-radius: 5px;
+    border: none;
+    outline: 1px solid #0099cc;
+    background: #ddd;
+    
+  }
+}

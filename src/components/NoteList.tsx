@@ -27,7 +27,9 @@ export const NoteList: FunctionComponent<NoteListTypes> = ({
             <span id={`note${index}`} className={style.noteContent}>
               {note.message}
             </span>
-            <span>{note.dueDate}</span>
+            <select aria-label="Due date" className={style.dueDate}>
+              <option value={note.dueDate}>{note.dueDate}</option>
+            </select>
           </div>
           <button
             aria-label={`Delete note #${index}`}

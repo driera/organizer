@@ -38,6 +38,9 @@ describe("NoteList", () => {
       );
 
       expect(screen.getByText("today")).toBeInTheDocument();
+      expect(screen.getByRole("combobox", { name: "Due date" })).toHaveValue(
+        "today"
+      );
     });
   });
 });
