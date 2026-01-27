@@ -1,6 +1,6 @@
-import { FunctionComponent } from "react";
-import { useState } from "react";
-import { dueDates, Note } from "../types";
+import { FunctionComponent, useState } from "react";
+import { Note } from "../types";
+import { Input, Button, Flex, Heading } from "@chakra-ui/react";
 
 type NoteTakerTypes = { onClick: (note: Note) => void };
 
@@ -21,9 +21,13 @@ export const NoteTaker: FunctionComponent<NoteTakerTypes> = ({ onClick }) => {
 
   return (
     <>
-      <h1>Do you have anything to write down?</h1>
-      <input type="text" onChange={handleInput} value={note.message} />
-      <button onClick={handleClick}>Send</button>
+      <Heading size="xl" mb={4}>
+        Do you have anything to write down?
+      </Heading>
+      <Flex gap={4} mb={8}>
+        <Input onChange={handleInput} value={note.message} />
+        <Button onClick={handleClick}>Send</Button>
+      </Flex>
     </>
   );
 };

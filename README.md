@@ -9,5 +9,8 @@ TO DO
 - Increase due date options (today, tomorrow, this week, this month, some day).
 - Notes appear ordered by due date, then by creation date
 - Notes appear in different columns, one per due date
-- Add styled & accessible components library.
+- [√] Add styled & accessible components library.
+- Switch to unstyled components library (radix?)
 - Revamp styles
+- Enable color mode
+- Add icons library

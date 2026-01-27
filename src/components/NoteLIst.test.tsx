@@ -1,21 +1,20 @@
 import { render, screen } from "@testing-library/react";
 import { NoteList } from "./NoteList";
 import userEvent from "@testing-library/user-event";
-import { dueDates, Notes } from "../types";
+import { Provider } from "./ui/provider";
 
 describe("NoteList", () => {
   it("renders a list of notes", () => {
     render(
-      <NoteList
-        notes={[{ message: "Hello, World!", dueDate: dueDates.TODAY }]}
-        onDelete={jest.fn()}
-        onUpdate={jest.fn()}
-      />
+      <Provider>
+        <NoteList
+          notes={[{ message: "Hello, World!", dueDate: "today" }]}
+          onDelete={jest.fn()}
+        />
+      </Provider>
     );
 
-    expect(
-      screen.getByRole("listitem", { name: "Hello, World!" })
-    ).toBeInTheDocument();
+    expect(screen.getByLabelText("Hello, World!")).toBeInTheDocument();
   });
 
   it("runs callback when note delete button is triggered", async () => {
@@ -24,7 +23,11 @@ describe("NoteList", () => {
       { message: "Hello, World!", dueDate: dueDates.TODAY }
     ];
     const onDelete = jest.fn();
-    render(<NoteList notes={notes} onDelete={onDelete} onUpdate={jest.fn()} />);
+    render(
+      <Provider>
+        <NoteList notes={notes} onDelete={onDelete} />
+      </Provider>
+    );
 
     const button = screen.getByRole("button", { name: "Delete note #0" });
     await user.click(button);
@@ -35,32 +38,12 @@ describe("NoteList", () => {
   describe("due date", () => {
     it("each notes has a select with its due day", () => {
       render(
-        <NoteList
-          notes={[{ message: "Hello, World!", dueDate: dueDates.TODAY }]}
-          onDelete={jest.fn()}
-          onUpdate={jest.fn()}
-        />
-      );
-
-      expect(
-        screen.getByRole("combobox", { name: "Due date" })
-      ).toBeInTheDocument();
-      expect(
-        (screen.getByRole("option", { name: "Today" }) as HTMLOptionElement)
-          .selected
-      ).toBe(true);
-    });
-
-    it("allows to update its value", async () => {
-      const user = userEvent.setup({ delay: 0 });
-      const onUpdate = jest.fn();
-      const message = "Hello, World!";
-      render(
-        <NoteList
-          notes={[{ message, dueDate: dueDates.TODAY }]}
-          onDelete={jest.fn()}
-          onUpdate={onUpdate}
-        />
+        <Provider>
+          <NoteList
+            notes={[{ message: "Hello, World!", dueDate: "today" }]}
+            onDelete={jest.fn()}
+          />
+        </Provider>
       );
 
       await user.selectOptions(
