@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { NotesRepository } from "./repository/notes-repository";
-import { Note, Notes } from "./types";
+import { Note, Notes, dueDates } from "./types";
 
 export const useNotes = () => {
   const [notes, setNotes] = useState<Notes>(NotesRepository.getNotes());
@@ -21,8 +21,10 @@ export const useNotes = () => {
     if (index < 0 || index >= notes.length) {
       return;
     }
+    const dueDateValue =
+      newDueDate === "some day" ? dueDates.SOME_DAY : dueDates.TODAY;
     const newNotes = [...notes];
-    newNotes[index] = { ...newNotes[index], dueDate: newDueDate };
+    newNotes[index] = { ...newNotes[index], dueDate: dueDateValue };
     setNotes(newNotes);
   };
 

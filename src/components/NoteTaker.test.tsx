@@ -2,6 +2,7 @@ import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { NoteTaker } from "./NoteTaker";
 import { Provider } from "./ui/provider";
+import { dueDates } from "../types";
 
 describe("NoteTaker", () => {
   it("submits note when Enter key is pressed", async () => {
@@ -19,7 +20,7 @@ describe("NoteTaker", () => {
 
     expect(mockOnClick).toHaveBeenCalledWith({
       message: "Test note",
-      dueDate: "today"
+      dueDate: dueDates.TODAY
     });
   });
 
@@ -72,7 +73,7 @@ describe("NoteTaker", () => {
 
     expect(mockOnClick).toHaveBeenCalledWith({
       message: "Test note",
-      dueDate: "today"
+      dueDate: dueDates.TODAY
     });
   });
 });

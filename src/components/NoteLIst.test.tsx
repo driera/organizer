@@ -2,13 +2,14 @@ import { render, screen } from "@testing-library/react";
 import { NoteList } from "./NoteList";
 import userEvent from "@testing-library/user-event";
 import { Provider } from "./ui/provider";
+import { dueDates, Notes } from "../types";
 
 describe("NoteList", () => {
   it("renders a list of notes", () => {
     render(
       <Provider>
         <NoteList
-          notes={[{ message: "Hello, World!", dueDate: "today" }]}
+          notes={[{ message: "Hello, World!", dueDate: dueDates.TODAY }]}
           onDelete={jest.fn()}
           onDueDateChange={jest.fn()}
         />
@@ -45,7 +46,7 @@ describe("NoteList", () => {
       render(
         <Provider>
           <NoteList
-            notes={[{ message: "Hello, World!", dueDate: "today" }]}
+            notes={[{ message: "Hello, World!", dueDate: dueDates.TODAY }]}
             onDelete={jest.fn()}
             onDueDateChange={jest.fn()}
           />
@@ -63,8 +64,8 @@ describe("NoteList", () => {
         <Provider>
           <NoteList
             notes={[
-              { message: "Note 1", dueDate: "today" },
-              { message: "Note 2", dueDate: "some day" }
+              { message: "Note 1", dueDate: dueDates.TODAY },
+              { message: "Note 2", dueDate: dueDates.SOME_DAY }
             ]}
             onDelete={jest.fn()}
             onDueDateChange={jest.fn()}
@@ -81,7 +82,7 @@ describe("NoteList", () => {
       render(
         <Provider>
           <NoteList
-            notes={[{ message: "Hello, World!", dueDate: "today" }]}
+            notes={[{ message: "Hello, World!", dueDate: dueDates.TODAY }]}
             onDelete={jest.fn()}
             onDueDateChange={jest.fn()}
           />
@@ -107,7 +108,7 @@ describe("NoteList", () => {
       render(
         <Provider>
           <NoteList
-            notes={[{ message: "Hello, World!", dueDate: "today" }]}
+            notes={[{ message: "Hello, World!", dueDate: dueDates.TODAY }]}
             onDelete={jest.fn()}
             onDueDateChange={onDueDateChange}
           />
@@ -132,8 +133,8 @@ describe("NoteList", () => {
         <Provider>
           <NoteList
             notes={[
-              { message: "Note 1", dueDate: "today" },
-              { message: "Note 2", dueDate: "some day" }
+              { message: "Note 1", dueDate: dueDates.TODAY },
+              { message: "Note 2", dueDate: dueDates.SOME_DAY }
             ]}
             onDelete={jest.fn()}
             onDueDateChange={onDueDateChange}

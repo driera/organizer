@@ -1,5 +1,5 @@
 import { FunctionComponent, useState } from "react";
-import { Note } from "../types";
+import { Note, dueDates } from "../types";
 import { Input, Button, Flex, Heading } from "@chakra-ui/react";
 
 type NoteTakerTypes = { onClick: (note: Note) => void };

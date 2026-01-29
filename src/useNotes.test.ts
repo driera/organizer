@@ -1,6 +1,7 @@
 import { renderHook, act } from "@testing-library/react";
 import { useNotes } from "./useNotes";
 import { NotesRepository } from "./repository/notes-repository";
+import { dueDates } from "./types";
 
 describe("useNotes", () => {
   let getNotesSpy: jest.SpyInstance;
@@ -19,9 +20,9 @@ describe("useNotes", () => {
   describe("updateNoteDueDate", () => {
     it("updates the due date of a note at the specified index", () => {
       const initialNotes = [
-        { message: "Note 1", dueDate: "today" },
-        { message: "Note 2", dueDate: "today" },
-        { message: "Note 3", dueDate: "today" }
+        { message: "Note 1", dueDate: dueDates.TODAY },
+        { message: "Note 2", dueDate: dueDates.TODAY },
+        { message: "Note 3", dueDate: dueDates.TODAY }
       ];
       getNotesSpy.mockReturnValue(initialNotes);
 
@@ -31,14 +32,14 @@ describe("useNotes", () => {
         result.current.updateNoteDueDate(1, "some day");
       });
 
-      expect(result.current.notes[1].dueDate).toBe("some day");
+      expect(result.current.notes[1].dueDate).toBe(dueDates.SOME_DAY);
     });
 
     it("does not affect other notes when updating one note", () => {
       const initialNotes = [
-        { message: "Note 1", dueDate: "today" },
-        { message: "Note 2", dueDate: "today" },
-        { message: "Note 3", dueDate: "today" }
+        { message: "Note 1", dueDate: dueDates.TODAY },
+        { message: "Note 2", dueDate: dueDates.TODAY },
+        { message: "Note 3", dueDate: dueDates.TODAY }
       ];
       getNotesSpy.mockReturnValue(initialNotes);
 
@@ -48,15 +49,15 @@ describe("useNotes", () => {
         result.current.updateNoteDueDate(1, "some day");
       });
 
-      expect(result.current.notes[0].dueDate).toBe("today");
-      expect(result.current.notes[1].dueDate).toBe("some day");
-      expect(result.current.notes[2].dueDate).toBe("today");
+      expect(result.current.notes[0].dueDate).toBe(dueDates.TODAY);
+      expect(result.current.notes[1].dueDate).toBe(dueDates.SOME_DAY);
+      expect(result.current.notes[2].dueDate).toBe(dueDates.TODAY);
     });
 
     it("persists changes to localStorage via NotesRepository", () => {
       const initialNotes = [
-        { message: "Note 1", dueDate: "today" },
-        { message: "Note 2", dueDate: "today" }
+        { message: "Note 1", dueDate: dueDates.TODAY },
+        { message: "Note 2", dueDate: dueDates.TODAY }
       ];
       getNotesSpy.mockReturnValue(initialNotes);
 
@@ -67,13 +68,13 @@ describe("useNotes", () => {
       });
 
       expect(setNotesSpy).toHaveBeenCalledWith([
-        { message: "Note 1", dueDate: "some day" },
-        { message: "Note 2", dueDate: "today" }
+        { message: "Note 1", dueDate: dueDates.SOME_DAY },
+        { message: "Note 2", dueDate: dueDates.TODAY }
       ]);
     });
 
     it("handles invalid index gracefully (negative index)", () => {
-      const initialNotes = [{ message: "Note 1", dueDate: "today" }];
+      const initialNotes = [{ message: "Note 1", dueDate: dueDates.TODAY }];
       getNotesSpy.mockReturnValue(initialNotes);
 
       const { result } = renderHook(() => useNotes());
@@ -86,7 +87,7 @@ describe("useNotes", () => {
     });
 
     it("handles invalid index gracefully (index out of bounds)", () => {
-      const initialNotes = [{ message: "Note 1", dueDate: "today" }];
+      const initialNotes = [{ message: "Note 1", dueDate: dueDates.TODAY }];
       getNotesSpy.mockReturnValue(initialNotes);
 
       const { result } = renderHook(() => useNotes());

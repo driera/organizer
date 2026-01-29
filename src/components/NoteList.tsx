@@ -31,12 +31,6 @@ export const NoteList: FunctionComponent<NoteListTypes> = ({
     return <p>No notes yet.</p>;
   }
 
-  const handleChange = (value: dueDates, note: Note, index: number) => {
-    const newNotes = [...notes];
-    newNotes[index] = { ...note, dueDate: value };
-    onUpdate(newNotes);
-  };
-
   return (
     <Flex direction="column" gap={4}>
       {notes.map((note, index) => (
