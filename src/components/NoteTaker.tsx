@@ -12,11 +12,21 @@ export const NoteTaker: FunctionComponent<NoteTakerTypes> = ({ onClick }) => {
     setNote({ message: event.target.value, dueDate: dueDates.TODAY });
   };
 
-  const handleClick = () => {
+  const sendNote = () => {
     if (note.message === "") return;
 
     onClick(note);
     setNote(emptyNote);
+  };
+
+  const handleClick = () => {
+    sendNote();
+  };
+
+  const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
+    if (event.key === "Enter") {
+      sendNote();
+    }
   };
 
   return (
@@ -25,7 +35,11 @@ export const NoteTaker: FunctionComponent<NoteTakerTypes> = ({ onClick }) => {
         Do you have anything to write down?
       </Heading>
       <Flex gap={4} mb={8}>
-        <Input onChange={handleInput} value={note.message} />
+        <Input
+          onChange={handleInput}
+          value={note.message}
+          onKeyDown={handleKeyDown}
+        />
         <Button onClick={handleClick}>Send</Button>
       </Flex>
     </>

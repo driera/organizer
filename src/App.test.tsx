@@ -37,6 +37,20 @@ describe("App", () => {
     await screen.findByText("Hello, World!");
   });
 
+  it("allows to write a note with Enter key", async () => {
+    const user = userEvent.setup({ delay: 0 });
+    render(
+      <Provider>
+        <App />
+      </Provider>
+    );
+
+    const input = screen.getByRole("textbox");
+    await user.type(input, "Hello, World!{Enter}");
+
+    await screen.findByText("Hello, World!");
+  });
+
   it("shows placeholders when there are no notes", () => {
     render(
       <Provider>
