@@ -17,7 +17,14 @@ export const useNotes = () => {
     setNotes(newNotes);
   };
 
-  const updateNotes = (newNotes: Notes) => setNotes(newNotes);
+  const updateNoteDueDate = (index: number, newDueDate: string) => {
+    if (index < 0 || index >= notes.length) {
+      return;
+    }
+    const newNotes = [...notes];
+    newNotes[index] = { ...newNotes[index], dueDate: newDueDate };
+    setNotes(newNotes);
+  };
 
-  return { notes, addNote, removeNote, updateNotes };
+  return { notes, addNote, removeNote, updateNoteDueDate };
 };

@@ -16,6 +16,16 @@ global.matchMedia = (query: string) => ({
 
 global.structuredClone = (val: unknown) => JSON.parse(JSON.stringify(val));
 
+class ResizeObserverMock {
+  observe = jest.fn();
+  unobserve = jest.fn();
+  disconnect = jest.fn();
+}
+
+global.ResizeObserver = ResizeObserverMock as typeof ResizeObserver;
+
+Element.prototype.scrollTo = jest.fn();
+
 afterEach(() => {
   cleanup();
 });
